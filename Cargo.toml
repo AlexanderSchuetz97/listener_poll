@@ -1,6 +1,6 @@
 [package]
 name = "listener_poll"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 authors = ["Alexander Schütz <aschuetz@protonmail.com>"]
@@ -15,5 +15,5 @@ rust-version = "1.66.0"
 version = "0.2"
 
 [target.'cfg(windows)'.dependencies.windows-sys]
-version = "0.59.0"
+version = "0.60.2"
 features = ["Win32_Networking_WinSock"]

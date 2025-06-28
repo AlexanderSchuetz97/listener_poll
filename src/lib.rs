@@ -101,9 +101,10 @@ pub trait PollEx {
     fn poll(&self, timeout: Option<Duration>) -> io::Result<bool>;
 }
 
-/// Apple specific impl
-#[cfg(target_vendor = "apple")]
-mod apple {
+/// Unix libc specific impl using poll.
+/// Apple and openbsd do not have the "ppoll" function and must therefore use this impl.
+#[cfg(any(target_vendor = "apple", target_os = "openbsd"))]
+mod unix_poll {
     use crate::PollEx;
     use libc::{c_int, poll, pollfd, POLLIN};
     use std::io;
@@ -169,9 +170,10 @@ mod apple {
     }
 }
 
-/// Unix (libc) specific impl. NOT APPLE THO!
-#[cfg(all(unix, not(target_vendor = "apple")))]
-mod unix {
+/// Unix libc specific impl using ppoll.
+/// Apple and openbsd do not have ppoll.
+#[cfg(all(unix, not(target_vendor = "apple"), not(target_os = "openbsd")))]
+mod unix_ppoll {
     use crate::PollEx;
     use libc::{pollfd, ppoll, timespec, POLLIN};
     use std::io;

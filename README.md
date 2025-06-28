@@ -31,9 +31,10 @@ fn handle_accept(listener: TcpListener, active: Arc<AtomicBool>) -> io::Result<(
 - |i686, x86_64, sparc64, powerpc, s390x|-unknown-linux-gnu
 - |i686, x86_64|-unknown-linux-musl
 - |i686, x86_64|-pc-windows-gnu
+- x86_64-unknown-freebsd
+- x86_64-unknown-openbsd
 
 ### Untested targets that probably work
 Compilation is tested!
 - |x86_64, aarch64|-apple-darwin
-- x86_64-unknown-freebsd
 - x86_64-unknown-netbsd
